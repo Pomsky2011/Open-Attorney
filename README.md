@@ -18,7 +18,7 @@ Install the C/C++ Extensions, and CMake. Then, build the repo.
 
 ## What this does
 
-So far, it only opens a blank window. Color changing soon :)
+It opens a window. You can change its color through the terminal.
 
 ## How to get cases
 
