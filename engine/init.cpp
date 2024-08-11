@@ -1,10 +1,7 @@
 #include "init.h"
 #include <iostream>
-#include <filesystem>
 
-namespace fs = std::filesystem;
-
-GameState* init(int argc, char* args[], const fs::path& executableDir) {
+GameState* init(int argc, char* args[]) {
     GameState* state = new GameState();
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -12,7 +9,7 @@ GameState* init(int argc, char* args[], const fs::path& executableDir) {
         return nullptr;
     }
 
-    state->window = SDL_CreateWindow("SDL2 Sprite", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+    state->window = SDL_CreateWindow("OpenAttorney", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (state->window == nullptr) {
         std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
         return nullptr;
@@ -24,10 +21,9 @@ GameState* init(int argc, char* args[], const fs::path& executableDir) {
         return nullptr;
     }
 
-    // Load sprite image
-    fs::path assetPath = executableDir / "assets" / "sprite.bmp";
-    std::cout << "Attempting to load sprite image from: " << assetPath << std::endl;
-    SDL_Surface* loadedSurface = SDL_LoadBMP(assetPath.string().c_str());
+    // Load sprite image using AppData
+    std::string spritePath = appdata::getAssetPath("sprite.bmp").string();
+    SDL_Surface* loadedSurface = SDL_LoadBMP(spritePath.c_str());
     if (loadedSurface == nullptr) {
         std::cerr << "Unable to load image! SDL Error: " << SDL_GetError() << std::endl;
         return nullptr;

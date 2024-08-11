@@ -2,7 +2,7 @@
 #define INIT_H
 
 #include <SDL.h>
-#include <filesystem>
+#include "appdata.h"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -14,7 +14,7 @@ struct GameState {
     SDL_Rect spriteRect;
 };
 
-GameState* init(int argc, char* args[], const std::filesystem::path& executableDir);
+GameState* init(int argc, char* args[]);
 void cleanup(GameState* state);
 
 #endif // INIT_H

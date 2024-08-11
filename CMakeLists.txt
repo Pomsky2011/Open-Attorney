@@ -12,6 +12,7 @@ add_executable(OpenAttorney
     main.cpp
     engine/init.cpp
     script/loop.cpp
+    engine/appdata.cpp
 )
 
 target_link_libraries(OpenAttorney ${SDL2_LIBRARIES})
