@@ -1,10 +1,9 @@
+// In loop.cpp
 #include "loop.h"
 #include "../engine/init.h"
 #include <algorithm>
 
-const int RECT_SIZE = 32;  // Add this line
-
-void movement_loop(SDL_Window* window, SDL_Surface* screenSurface, SDL_Rect& rect, Uint32 rectColor, bool& quit) {
+void movement_loop(GameState* state, bool& quit) {
     SDL_Event e;
     bool colorLoop = true;
     bool moveUp = false, moveDown = false, moveLeft = false, moveRight = false;
@@ -50,28 +49,29 @@ void movement_loop(SDL_Window* window, SDL_Surface* screenSurface, SDL_Rect& rec
             }
         }
 
-        // Move rectangle based on key states
+        // Move sprite based on key states
         if (moveUp) {
-            rect.y = std::max(0, rect.y - 2);
+            state->spriteRect.y = std::max(0, state->spriteRect.y - 1);
         }
         if (moveDown) {
-            rect.y = std::min(SCREEN_HEIGHT - RECT_SIZE, rect.y + 2);
+            state->spriteRect.y = std::min(SCREEN_HEIGHT - state->spriteRect.h, state->spriteRect.y + 1);
         }
         if (moveLeft) {
-            rect.x = std::max(0, rect.x - 2);
+            state->spriteRect.x = std::max(0, state->spriteRect.x - 1);
         }
         if (moveRight) {
-            rect.x = std::min(SCREEN_WIDTH - RECT_SIZE, rect.x + 2);
+            state->spriteRect.x = std::min(SCREEN_WIDTH - state->spriteRect.w, state->spriteRect.x + 1);
         }
 
-        // Clear the screen
-        SDL_FillRect(screenSurface, nullptr, SDL_MapRGB(screenSurface->format, 255, 255, 255));
+        // Clear screen
+        SDL_SetRenderDrawColor(state->renderer, 255, 255, 255, 255);
+        SDL_RenderClear(state->renderer);
 
-        // Draw the colored rectangle
-        SDL_FillRect(screenSurface, &rect, rectColor);
+        // Render sprite
+        SDL_RenderCopy(state->renderer, state->spriteTexture, NULL, &(state->spriteRect));
 
-        // Update the surface
-        SDL_UpdateWindowSurface(window);
+        // Update screen
+        SDL_RenderPresent(state->renderer);
 
         // Small delay to control frame rate (approximately 60 FPS)
         SDL_Delay(16);

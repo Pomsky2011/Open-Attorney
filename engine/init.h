@@ -2,10 +2,19 @@
 #define INIT_H
 
 #include <SDL.h>
+#include <filesystem>
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-SDL_Window* init(int argc, char* args[]);
+struct GameState {
+    SDL_Window* window;
+    SDL_Renderer* renderer;
+    SDL_Texture* spriteTexture;
+    SDL_Rect spriteRect;
+};
+
+GameState* init(int argc, char* args[], const std::filesystem::path& executableDir);
+void cleanup(GameState* state);
 
 #endif // INIT_H
