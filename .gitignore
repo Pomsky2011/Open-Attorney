@@ -24,8 +24,9 @@ build/
 # macOS specific files
 .DS_Store
 
-# VS Code settings
+# IDE Settings
 .vscode/
+*.xcodeproj
 
 # CMake generated files
 CMakeCache.txt
