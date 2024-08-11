@@ -3,16 +3,20 @@
 #include "engine/init.h"
 
 int main(int argc, char* args[]) {
-    if (init(argc, args) != 0) {
+    SDL_Window* window = init(argc, args);
+    if (window == nullptr) {
         std::cerr << "Failed to initialize!" << std::endl;
         return 1;
     }
 
-    SDL_Window* window = SDL_GetWindowFromID(1); // Assuming the window created in init() is the first one
-    if (window == nullptr) {
-        std::cerr << "Failed to get window! SDL_Error: " << SDL_GetError() << std::endl;
-        return 1;
-    }
+    // Get the window surface
+    SDL_Surface* screenSurface = SDL_GetWindowSurface(window);
+
+    // Fill the surface with the desired color (e.g., red)
+    SDL_FillRect(screenSurface, nullptr, SDL_MapRGB(screenSurface->format, 255, 0, 0));
+
+    // Update the surface
+    SDL_UpdateWindowSurface(window);
 
     // Main game loop
     SDL_Event e;
