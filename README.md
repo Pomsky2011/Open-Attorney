@@ -16,7 +16,17 @@ Install the C/C++ Extensions, and CMake. Then, build the repo.
 
 ## What this does
 
-It opens a window. You can change its color through the terminal.
+It opens a window, and lets you move the sprite.bmp on its App directory around the screen. It's not much, but it is progress.
+
+## Immediate goals
+
+Make a title screen.
+
+Make a loading animation.
+
+## Next goals
+
+Make the witness stand.
 
 ## How to get cases
 
