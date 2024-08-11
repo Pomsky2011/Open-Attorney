@@ -1,5 +1,8 @@
 #include "init.h"
 #include <iostream>
+#include <filesystem>
+
+namespace fs = std::filesystem;
 
 GameState* init(int argc, char* args[]) {
     GameState* state = new GameState();
@@ -9,7 +12,7 @@ GameState* init(int argc, char* args[]) {
         return nullptr;
     }
 
-    state->window = SDL_CreateWindow("OpenAttorney", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+    state->window = SDL_CreateWindow("Open Attorney", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (state->window == nullptr) {
         std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
         return nullptr;
@@ -21,17 +24,24 @@ GameState* init(int argc, char* args[]) {
         return nullptr;
     }
 
-    // Load sprite image using AppData
+    // Load sprite image using AppData with enhanced error handling
     std::string spritePath = appdata::getAssetPath("sprite.bmp").string();
+    
+    // Check if the file exists before attempting to load
+    if (!fs::exists(spritePath)) {
+        std::cerr << "Sprite file does not exist at path: " << spritePath << std::endl;
+        return nullptr;
+    }
+
     SDL_Surface* loadedSurface = SDL_LoadBMP(spritePath.c_str());
     if (loadedSurface == nullptr) {
-        std::cerr << "Unable to load image! SDL Error: " << SDL_GetError() << std::endl;
+        std::cerr << "Unable to load image at path: " << spritePath << "! SDL Error: " << SDL_GetError() << std::endl;
         return nullptr;
     }
 
     state->spriteTexture = SDL_CreateTextureFromSurface(state->renderer, loadedSurface);
     if (state->spriteTexture == nullptr) {
-        std::cerr << "Unable to create texture from surface! SDL Error: " << SDL_GetError() << std::endl;
+        std::cerr << "Unable to create texture from surface at path: " << spritePath << "! SDL Error: " << SDL_GetError() << std::endl;
         return nullptr;
     }
 
