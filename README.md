@@ -6,8 +6,6 @@ An open-source SDL Ace Attorney Engine.
 
 SDL2 (Latest)
 
-C++ 11
-
 ## Building
 
 This is the only known method, embarassingly:
@@ -31,4 +29,3 @@ In the future, you will be able to make investigations, and import special .cas 
 In the far future, you will be able to import the RomFS of a NON-PIRATED 3DS Copy of the Trilogy as a .zip, and everything but "Rise from the Ashes" will work.
 
 In the FAR far future, you will be able to import any decrypted, NON-PIRATED ROM of any game.
-    
