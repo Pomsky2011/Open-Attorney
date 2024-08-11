@@ -28,6 +28,7 @@ In the near future, you might be able to make cases set in courtrooms.
 
 In the future, you will be able to make investigations, and import special .cas files made for Open Attorney.
 
-In the far future, you will be able to import the RomFS of a NON-PIRATED 3DS Copy of the Trilogy, and everything but "Rise from the Ashes" will work.
+In the far future, you will be able to import the RomFS of a NON-PIRATED 3DS Copy of the Trilogy as a .zip, and everything but "Rise from the Ashes" will work.
 
 In the FAR far future, you will be able to import any decrypted, NON-PIRATED ROM of any game.
+    
