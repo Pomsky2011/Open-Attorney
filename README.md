@@ -69,9 +69,8 @@ Note: Adjust the SDL2 include and library paths as necessary for your system.
 
 ## Immediate Goals
 
-1. Add a background image (background.bmp) to be displayed behind the gameplay area.
-2. Implement a title screen.
-3. Create a loading animation.
+1. Implement a title screen.
+2. Create a loading animation.
 
 ## Future Plans
 

@@ -72,6 +72,12 @@ void movement_loop(GameState* state, bool& quit) {
                 throw std::runtime_error("SDL_RenderClear failed: " + std::string(SDL_GetError()));
             }
 
+            // Render the background to fill the entire window
+            SDL_Rect backgroundRect = {0, 0, state->currentWidth, state->currentHeight};
+            if (SDL_RenderCopy(state->renderer, state->backgroundTexture, NULL, &backgroundRect) < 0) {
+                throw std::runtime_error("SDL_RenderCopy failed for background: " + std::string(SDL_GetError()));
+            }
+
             // Draw the white gameplay area
             SDL_Rect gameplayArea = {offsetX, offsetY, gameplayWidth, gameplayHeight};
             if (SDL_SetRenderDrawColor(state->renderer, 255, 255, 255, 255) < 0) {
@@ -90,7 +96,7 @@ void movement_loop(GameState* state, bool& quit) {
 
             // Render scaled sprite
             if (SDL_RenderCopy(state->renderer, state->spriteTexture, NULL, &destRect) < 0) {
-                throw std::runtime_error("SDL_RenderCopy failed: " + std::string(SDL_GetError()));
+                throw std::runtime_error("SDL_RenderCopy failed for sprite: " + std::string(SDL_GetError()));
             }
 
             // Update screen

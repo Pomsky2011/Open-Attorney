@@ -12,6 +12,7 @@ struct GameState {
     SDL_Window* window;
     SDL_Renderer* renderer;
     SDL_Texture* spriteTexture;
+    SDL_Texture* backgroundTexture;
     SDL_Rect spriteRect;
     int currentWidth;
     int currentHeight;

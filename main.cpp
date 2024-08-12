@@ -5,12 +5,23 @@
 #include "script/loop.h"
 #include "engine/appdata.h"
 
+SDL_Texture* loadBackgroundTexture(SDL_Renderer* renderer) {
+    SDL_Texture* backgroundTexture = loadScaledTexture(renderer, "background.bmp", SCREEN_WIDTH, SCREEN_HEIGHT);
+    if (backgroundTexture == nullptr) {
+        std::cout << "Background texture not found. Creating a black placeholder." << std::endl;
+        backgroundTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STATIC, 1, 1);
+        if (backgroundTexture == nullptr) {
+            std::cerr << "Failed to create placeholder texture: " << SDL_GetError() << std::endl;
+            return nullptr;
+        }
+        uint32_t black = 0;
+        SDL_UpdateTexture(backgroundTexture, NULL, &black, sizeof(uint32_t));
+    }
+    return backgroundTexture;
+}
+
 int main(int argc, char* args[]) {
     try {
-        std::cout << "Open Attorney" << std::endl;
-        std::cout << "This program comes with ABSOLUTELY NO WARRANTY; for details visit https://www.gnu.org/licenses/." << std::endl;
-        std::cout << "This is free software, and you are welcome to redistribute it under certain conditions; visit https://www.gnu.org/licenses/ for details." << std::endl;
-
         // Initialize AppData and copy assets if necessary
         appdata::initializeAssets();
 
@@ -19,6 +30,22 @@ int main(int argc, char* args[]) {
             throw std::runtime_error("Failed to initialize game state!");
         }
 
+        // Load textures
+        state->spriteTexture = loadTexture(state->renderer, "sprite.bmp");
+        if (state->spriteTexture == nullptr) {
+            throw std::runtime_error("Failed to load sprite texture!");
+        }
+
+        state->backgroundTexture = loadBackgroundTexture(state->renderer);
+        if (state->backgroundTexture == nullptr) {
+            throw std::runtime_error("Failed to load or create background texture!");
+        }
+
+        // Get the dimensions of the sprite texture
+        int w, h;
+        SDL_QueryTexture(state->spriteTexture, NULL, NULL, &w, &h);
+        state->spriteRect = {(SCREEN_WIDTH - w) / 2, (SCREEN_HEIGHT - h) / 2, w, h};
+
         bool quit = false;
         movement_loop(state, quit);
 
@@ -26,7 +53,7 @@ int main(int argc, char* args[]) {
 
         return 0;
     } catch (const std::exception& e) {
-        std::cerr << "Fatal error: " << e.what() << std::endl;
+        std::cerr << "Error: " << e.what() << std::endl;
         return 1;
     }
 }
