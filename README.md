@@ -1,43 +1,90 @@
 # Open Attorney
 
-An open-source SDL Ace Attorney Engine.
+An open-source SDL Ace Attorney Engine licensed under GPLv3.
+
+## Project Overview
+
+Open Attorney aims to create an open-source engine for Ace Attorney-style games using SDL2. The project is in its early stages, focusing on basic functionality and laying the groundwork for future features.
+
+## Current Features
+
+- SDL2 window creation and management
+- Sprite rendering and movement
+- Window scaling with maintained 4:3 aspect ratio
+- Basic error handling and debugging output
 
 ## Dependencies
 
-SDL2 (Latest)
+- SDL2 (Latest version)
+- C++17 compatible compiler
 
-## Building
+## Project Structure
 
-This is the only known method, embarassingly:
+```
+Open Attorney/
+├── main.cpp
+├── engine/
+│   ├── init.cpp
+│   ├── init.h
+│   ├── appdata.cpp
+│   ├── appdata.h
+│   ├── texture_loader.cpp
+│   └── texture_loader.h
+├── script/
+│   ├── loop.cpp
+│   └── loop.h
+├── assets/
+│   └── sprite.bmp
+├── .vscode/
+│   └── tasks.json
+└── CMakeLists.txt
+```
 
-Use Visual Studio Code for your OS, with this repo cloned or downloaded.
+## Building the Project
 
-Install the C/C++ Extensions, and CMake. Then, build the repo.
+### Using Visual Studio Code (Recommended)
 
-## What this does
+1. Clone or download this repository.
+2. Open the project folder in Visual Studio Code.
+3. Install the C/C++ and CMake extensions.
+4. Configure the project using CMake.
+5. Build the project using the CMake extension or the provided tasks in `.vscode/tasks.json`.
 
-It opens a window, and lets you move the sprite.bmp on its App directory around the screen. The window can also be scaled. It's not much, but it is progress.
+### Manual Compilation
 
-## Immediate goals
+If not using VS Code, you can compile manually using the following command:
 
-Add a background.bmp to be displayed behind the white screen.
+```bash
+clang++ -std=c++17 -stdlib=libc++ -g main.cpp engine/init.cpp engine/appdata.cpp engine/texture_loader.cpp script/loop.cpp -o main -I. -I/usr/local/opt/sdl2/include/SDL2 -L/usr/local/opt/sdl2/lib -lSDL2
+```
 
-Make a title screen.
+Note: Adjust the SDL2 include and library paths as necessary for your system.
 
-Make a loading animation.
+## Current Functionality
 
-## Next goals
+- Opens a window with a 4:3 aspect ratio gameplay area.
+- Renders a sprite (sprite.bmp) that can be moved using arrow keys.
+- Handles window resizing while maintaining the aspect ratio.
+- Implements basic error handling and logging.
 
-Make the witness stand.
+## Immediate Goals
 
-## How to get cases
+1. Add a background image (background.bmp) to be displayed behind the gameplay area.
+2. Implement a title screen.
+3. Create a loading animation.
 
-Right now, you don't.
+## Future Plans
 
-In the near future, you might be able to make cases set in courtrooms.
+1. Implement the witness stand and courtroom mechanics.
+2. Develop a case creation system.
+3. Add support for investigations.
+4. Create a custom .cas file format for Open Attorney cases.
+5. Implement compatibility with official Ace Attorney game assets (for non-pirated copies).
 
-In the future, you will be able to make investigations, and import special .cas files made for Open Attorney.
+## Contributing
 
-In the far future, you will be able to import the RomFS of a NON-PIRATED 3DS Copy of the Trilogy as a .zip, and everything but "Rise from the Ashes" will work.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-In the FAR far future, you will be able to import any decrypted, NON-PIRATED ROM of any game.
+## License
+
+This project is licensed under the GNU General Public License v3.0 (GPLv3).
