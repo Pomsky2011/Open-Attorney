@@ -6,8 +6,11 @@
 #include "engine/appdata.h"
 
 int main(int argc, char* args[]) {
-    std::cout << "Open Attorney\nThis program comes with ABSOLUTELY NO WARRANTY; for details visit https://www.gnu.org/licenses/.\nThis is free software, and you are welcome to redistribute it under certain conditions; visit https://www.gnu.org/licenses/ for details.\n";
     try {
+        std::cout << "Open Attorney" << std::endl;
+        std::cout << "This program comes with ABSOLUTELY NO WARRANTY; for details visit https://www.gnu.org/licenses/." << std::endl;
+        std::cout << "This is free software, and you are welcome to redistribute it under certain conditions; visit https://www.gnu.org/licenses/ for details." << std::endl;
+
         // Initialize AppData and copy assets if necessary
         appdata::initializeAssets();
 
@@ -23,7 +26,7 @@ int main(int argc, char* args[]) {
 
         return 0;
     } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << "Fatal error: " << e.what() << std::endl;
         return 1;
     }
 }

@@ -13,6 +13,8 @@ struct GameState {
     SDL_Renderer* renderer;
     SDL_Texture* spriteTexture;
     SDL_Rect spriteRect;
+    int currentWidth;
+    int currentHeight;
 };
 
 GameState* init(int argc, char* args[]);
