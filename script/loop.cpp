@@ -27,9 +27,6 @@ void movement_loop(GameState* state, bool& quit) {
                     case SDLK_RIGHT:
                         moveRight = true;
                         break;
-                    case SDLK_q:
-                        colorLoop = false;
-                        break;
                 }
             } else if (e.type == SDL_KEYUP) {
                 switch (e.key.keysym.sym) {
@@ -51,16 +48,16 @@ void movement_loop(GameState* state, bool& quit) {
 
         // Move sprite based on key states
         if (moveUp) {
-            state->spriteRect.y = std::max(0, state->spriteRect.y - 1);
+            state->spriteRect.y = std::max(0, state->spriteRect.y - 2);
         }
         if (moveDown) {
-            state->spriteRect.y = std::min(SCREEN_HEIGHT - state->spriteRect.h, state->spriteRect.y + 1);
+            state->spriteRect.y = std::min(SCREEN_HEIGHT - state->spriteRect.h, state->spriteRect.y + 2);
         }
         if (moveLeft) {
-            state->spriteRect.x = std::max(0, state->spriteRect.x - 1);
+            state->spriteRect.x = std::max(0, state->spriteRect.x - 2);
         }
         if (moveRight) {
-            state->spriteRect.x = std::min(SCREEN_WIDTH - state->spriteRect.w, state->spriteRect.x + 1);
+            state->spriteRect.x = std::min(SCREEN_WIDTH - state->spriteRect.w, state->spriteRect.x + 2);
         }
 
         // Clear screen
