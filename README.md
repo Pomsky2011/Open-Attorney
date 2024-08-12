@@ -33,8 +33,6 @@ Open Attorney/
 ├── script/
 │   ├── loop.cpp
 │   └── loop.h
-├── assets/
-│   └── sprite.bmp
 └── CMakeLists.txt
 ```
 
