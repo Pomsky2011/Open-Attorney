@@ -6,6 +6,7 @@
 #include "engine/appdata.h"
 
 int main(int argc, char* args[]) {
+    std::cout << "Open Attorney\nThis program comes with ABSOLUTELY NO WARRANTY; for details visit https://www.gnu.org/licenses/.\nThis is free software, and you are welcome to redistribute it\nunder certain conditions; visit https://www.gnu.org/licenses/ for details.\n";
     try {
         // Initialize AppData and copy assets if necessary
         appdata::initializeAssets();
