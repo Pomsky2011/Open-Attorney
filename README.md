@@ -16,9 +16,11 @@ Install the C/C++ Extensions, and CMake. Then, build the repo.
 
 ## What this does
 
-It opens a window, and lets you move the sprite.bmp on its App directory around the screen. It's not much, but it is progress.
+It opens a window, and lets you move the sprite.bmp on its App directory around the screen. The window can also be scaled. It's not much, but it is progress.
 
 ## Immediate goals
+
+Add a background.bmp to be displayed behind the white screen.
 
 Make a title screen.
 
