@@ -3,11 +3,16 @@
 #include <algorithm>
 #include <iostream>
 #include <stdexcept>
+#include <cmath>
 
 void movement_loop(GameState* state, bool& quit) {
     try {
         SDL_Event e;
         bool moveUp = false, moveDown = false, moveLeft = false, moveRight = false;
+
+        // Constants for movement speed
+        const float BASE_SPEED = 2.0f;
+        const float DIAGONAL_FACTOR = 1.0f / std::sqrt(2.0f);
 
         while (!quit) {
             while (SDL_PollEvent(&e) != 0) {
@@ -58,11 +63,24 @@ void movement_loop(GameState* state, bool& quit) {
             int scaledSpriteSize = (int)(state->spriteRect.w * scale);
 
             // Move sprite based on key states
-            float moveSpeed = 2.0f * scale;
-            if (moveUp) state->spriteRect.y = std::max(0, state->spriteRect.y - (int)moveSpeed);
-            if (moveDown) state->spriteRect.y = std::min(SCREEN_HEIGHT - state->spriteRect.h, state->spriteRect.y + (int)moveSpeed);
-            if (moveLeft) state->spriteRect.x = std::max(0, state->spriteRect.x - (int)moveSpeed);
-            if (moveRight) state->spriteRect.x = std::min(SCREEN_WIDTH - state->spriteRect.w, state->spriteRect.x + (int)moveSpeed);
+            float dx = 0, dy = 0;
+
+            if (moveUp) dy -= 1;
+            if (moveDown) dy += 1;
+            if (moveLeft) dx -= 1;
+            if (moveRight) dx += 1;
+
+            // Normalize diagonal movement
+            if (dx != 0 && dy != 0) {
+                dx *= DIAGONAL_FACTOR;
+                dy *= DIAGONAL_FACTOR;
+            }
+
+            // Apply movement
+            state->spriteRect.x = std::max(0, std::min(SCREEN_WIDTH - state->spriteRect.w, 
+                                           state->spriteRect.x + static_cast<int>(dx * BASE_SPEED)));
+            state->spriteRect.y = std::max(0, std::min(SCREEN_HEIGHT - state->spriteRect.h, 
+                                           state->spriteRect.y + static_cast<int>(dy * BASE_SPEED)));
 
             // Clear screen
             if (SDL_SetRenderDrawColor(state->renderer, 0, 0, 0, 255) < 0) {

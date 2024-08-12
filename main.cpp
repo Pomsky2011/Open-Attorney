@@ -4,6 +4,7 @@
 #include "engine/texture_loader.h"
 #include "script/loop.h"
 #include "engine/appdata.h"
+#include <vector>
 
 SDL_Texture* loadBackgroundTexture(SDL_Renderer* renderer) {
     SDL_Texture* backgroundTexture = loadScaledTexture(renderer, "background.bmp", SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -20,6 +21,21 @@ SDL_Texture* loadBackgroundTexture(SDL_Renderer* renderer) {
     return backgroundTexture;
 }
 
+SDL_Texture* loadSpriteTexture(SDL_Renderer* renderer) {
+    SDL_Texture* spriteTexture = loadTexture(renderer, "sprite.bmp");
+    if (spriteTexture == nullptr) {
+        std::cout << "Sprite texture not found. Creating a black 32x32 placeholder." << std::endl;
+        spriteTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STATIC, 32, 32);
+        if (spriteTexture == nullptr) {
+            std::cerr << "Failed to create placeholder sprite texture: " << SDL_GetError() << std::endl;
+            return nullptr;
+        }
+        std::vector<uint32_t> pixels(32 * 32, 0);  // 32x32 black pixels
+        SDL_UpdateTexture(spriteTexture, NULL, pixels.data(), 32 * sizeof(uint32_t));
+    }
+    return spriteTexture;
+}
+
 int main(int argc, char* args[]) {
     try {
         // Initialize AppData and copy assets if necessary
@@ -31,9 +47,9 @@ int main(int argc, char* args[]) {
         }
 
         // Load textures
-        state->spriteTexture = loadTexture(state->renderer, "sprite.bmp");
+        state->spriteTexture = loadSpriteTexture(state->renderer);
         if (state->spriteTexture == nullptr) {
-            throw std::runtime_error("Failed to load sprite texture!");
+            throw std::runtime_error("Failed to load or create sprite texture!");
         }
 
         state->backgroundTexture = loadBackgroundTexture(state->renderer);
