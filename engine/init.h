@@ -3,6 +3,7 @@
 
 #include <SDL.h>
 #include "appdata.h"
+#include "texture_loader.h"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;

@@ -11,8 +11,9 @@ include_directories(${CMAKE_SOURCE_DIR})
 add_executable(OpenAttorney 
     main.cpp
     engine/init.cpp
-    script/loop.cpp
     engine/appdata.cpp
+    engine/texture_loader.cpp
+    script/loop.cpp
 )
 
 target_link_libraries(OpenAttorney ${SDL2_LIBRARIES})

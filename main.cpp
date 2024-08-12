@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <iostream>
 #include "engine/init.h"
+#include "engine/texture_loader.h"
 #include "script/loop.h"
 #include "engine/appdata.h"
 

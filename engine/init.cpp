@@ -1,8 +1,6 @@
 #include "init.h"
+#include "texture_loader.h"
 #include <iostream>
-#include <filesystem>
-
-namespace fs = std::filesystem;
 
 GameState* init(int argc, char* args[]) {
     GameState* state = new GameState();
@@ -24,30 +22,15 @@ GameState* init(int argc, char* args[]) {
         return nullptr;
     }
 
-    // Load sprite image using AppData with enhanced error handling
-    std::string spritePath = appdata::getAssetPath("sprite.bmp").string();
-    
-    // Check if the file exists before attempting to load
-    if (!fs::exists(spritePath)) {
-        std::cerr << "Sprite file does not exist at path: " << spritePath << std::endl;
-        return nullptr;
-    }
-
-    SDL_Surface* loadedSurface = SDL_LoadBMP(spritePath.c_str());
-    if (loadedSurface == nullptr) {
-        std::cerr << "Unable to load image at path: " << spritePath << "! SDL Error: " << SDL_GetError() << std::endl;
-        return nullptr;
-    }
-
-    state->spriteTexture = SDL_CreateTextureFromSurface(state->renderer, loadedSurface);
+    state->spriteTexture = loadTexture(state->renderer, "sprite.bmp");
     if (state->spriteTexture == nullptr) {
-        std::cerr << "Unable to create texture from surface at path: " << spritePath << "! SDL Error: " << SDL_GetError() << std::endl;
         return nullptr;
     }
 
-    state->spriteRect = {(SCREEN_WIDTH - loadedSurface->w) / 2, (SCREEN_HEIGHT - loadedSurface->h) / 2, loadedSurface->w, loadedSurface->h};
-
-    SDL_FreeSurface(loadedSurface);
+    // Get the dimensions of the texture
+    int w, h;
+    SDL_QueryTexture(state->spriteTexture, NULL, NULL, &w, &h);
+    state->spriteRect = {(SCREEN_WIDTH - w) / 2, (SCREEN_HEIGHT - h) / 2, w, h};
 
     return state;
 }
