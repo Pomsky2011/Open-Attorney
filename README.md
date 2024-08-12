@@ -35,8 +35,6 @@ Open Attorney/
 │   └── loop.h
 ├── assets/
 │   └── sprite.bmp
-├── .vscode/
-│   └── tasks.json
 └── CMakeLists.txt
 ```
 
