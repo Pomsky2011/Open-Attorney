@@ -12,6 +12,7 @@ Open Attorney aims to create an open-source engine for Ace Attorney-style games 
 - Sprite rendering and movement
 - Window scaling with maintained 4:3 aspect ratio
 - Basic error handling and debugging output
+- A background
 
 ## Dependencies
 
