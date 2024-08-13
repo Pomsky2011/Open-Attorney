@@ -19,5 +19,5 @@ def append_asset(binary_path, asset_path):
 
 if __name__ == "__main__":
     binary_path = "main"  # Replace with your actual binary name
-    asset_path = "font.bmp"
+    asset_path = "assets/font.bmp"
     append_asset(binary_path, asset_path)
