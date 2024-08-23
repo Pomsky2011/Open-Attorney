@@ -57,7 +57,7 @@ If not using VS Code, you can compile manually using the following command:
 cmake -S . -B build && cmake --build build
 ```
 
-Note: Adjust the SDL2 include and library paths as necessary for your system.
+Note: Built-in fonts may not appear unless you use the command above, even if using VS Code.
 
 ## Current Functionality
 
