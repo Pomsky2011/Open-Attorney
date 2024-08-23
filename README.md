@@ -24,14 +24,16 @@ Open Attorney aims to create an open-source engine for Ace Attorney-style games 
 ```
 Open Attorney/
 ├── main.cpp
+├── assets/
+|   └── font.bmp
 ├── engine/
 │   ├── init.cpp
 │   ├── init.h
 │   ├── appdata.cpp
 │   ├── appdata.h
 │   ├── texture_loader.cpp
-│   └── texture_loader.h
-|   └── asset_manager.cpp
+│   ├── texture_loader.h
+|   ├──  asset_manager.cpp
 |   └── asset_manager.h
 ├── script/
 │   ├── loop.cpp
