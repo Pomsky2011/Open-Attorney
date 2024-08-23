@@ -4,6 +4,7 @@
 #include "engine/texture_loader.h"
 #include "script/loop.h"
 #include "engine/appdata.h"
+#include "engine/asset_manager.h"
 #include <vector>
 
 SDL_Texture* loadBackgroundTexture(SDL_Renderer* renderer) {
@@ -37,6 +38,14 @@ SDL_Texture* loadSpriteTexture(SDL_Renderer* renderer) {
 }
 
 int main(int argc, char* args[]) {
+    try {
+        AssetManager::initialize(); // Uses "main" as the default binary name
+        std::vector<char> fontData = AssetManager::getAsset("font.bmp");
+        // Use fontData to load your font
+    } catch (const std::exception& e) {
+        std::cerr << "Failed to load asset: " << e.what() << std::endl;
+    }
+
     try {
         // Initialize AppData and copy assets if necessary
         appdata::initializeAssets();

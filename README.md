@@ -52,7 +52,7 @@ Open Attorney/
 If not using VS Code, you can compile manually using the following command:
 
 ```bash
-clang++ -std=c++17 -stdlib=libc++ -g main.cpp engine/init.cpp engine/appdata.cpp engine/texture_loader.cpp script/loop.cpp -o main -I. -I/usr/local/opt/sdl2/include/SDL2 -L/usr/local/opt/sdl2/lib -lSDL2
+cmake -S . -B build && cmake --build build
 ```
 
 Note: Adjust the SDL2 include and library paths as necessary for your system.
