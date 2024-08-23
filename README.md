@@ -31,6 +31,8 @@ Open Attorney/
 │   ├── appdata.h
 │   ├── texture_loader.cpp
 │   └── texture_loader.h
+|   └── asset_manager.cpp
+|   └── asset_manager.h
 ├── script/
 │   ├── loop.cpp
 │   └── loop.h
@@ -63,6 +65,7 @@ Note: Adjust the SDL2 include and library paths as necessary for your system.
 - Renders a sprite (sprite.bmp) that can be moved using arrow keys.
 - Handles window resizing while maintaining the aspect ratio.
 - Implements basic error handling and logging.
+- Attempts to fetch an appended asset.
 
 ## Immediate Goals
 
