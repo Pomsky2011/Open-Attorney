@@ -59,7 +59,7 @@ If not using VS Code, you can compile manually using the following command:
 cmake -S . -B build && cmake --build build
 ```
 
-Note: Built-in fonts may not appear unless you use the command above, even if using VS Code.
+Note: Built-in fonts may not appear unless you use the command above or the CMake extension.
 
 ## Current Functionality
 
