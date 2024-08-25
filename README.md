@@ -49,7 +49,7 @@ Open Attorney/
 2. Open the project folder in Visual Studio Code.
 3. Install the C/C++ and CMake extensions.
 4. Configure the project using CMake.
-5. Build the project using the CMake extension or the provided tasks in `.vscode/tasks.json`.
+5. Build the project using the CMake extension (Suggested) or the provided tasks in `.vscode/tasks.json`.
 
 ### Manual Compilation
 
