@@ -18,6 +18,6 @@ def append_asset(binary_path, asset_path):
     print(f"Appended {asset_name} to {binary_path}")
 
 if __name__ == "__main__":
-    binary_path = "main"  # Replace with your actual binary name
+    binary_path = "build/OpenAttorney"  # Replace with your actual binary name
     asset_path = "assets/font.bmp"
     append_asset(binary_path, asset_path)
