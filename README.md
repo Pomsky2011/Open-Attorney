@@ -53,7 +53,7 @@ Open Attorney/
 
 ### Manual Compilation
 
-If not using VS Code, you can compile manually using the following command:
+If not using VS Code, you can compile manually using the following command with bash:
 
 ```bash
 cmake -S . -B build && cmake --build build
